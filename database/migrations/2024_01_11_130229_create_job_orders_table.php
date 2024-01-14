@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('job_orders', function (Blueprint $table) {
             $table->id();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('order_slug');
+            $table->string('unit_name');
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->enum('status', ['In Progress', 'On Hold', 'Done', 'For Repair']);
+            $table->string('scheduled_visit');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
