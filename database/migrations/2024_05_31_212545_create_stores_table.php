@@ -10,15 +10,16 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('sku');
-            $table->string('item_name');
-            $table->string('description')->nullable();
-            $table->integer('quantity');
-            $table->boolean('is_active');
+            $table->string('avatar')->nullable();
+            $table->string('name');
+            $table->string('address');
+            $table->string('slug');
+            $table->enum('classification', ['retail', 'service']);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +30,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('stores');
     }
 };
