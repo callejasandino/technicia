@@ -16,6 +16,8 @@ class Store extends Model
         'avatar',
         'name',
         'address',
+        'contact',
+        'email',
         'slug',
         'classification',
         'is_active',

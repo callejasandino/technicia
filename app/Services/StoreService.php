@@ -34,6 +34,8 @@ class StoreService
             'address' => $request->input('address'),
             'slug' => $slug,
             'classification' => $request->input('classification'),
+            'contact' => $request->input('contact'),
+            'email' => $request->input('email'),
         ]);
 
         return response()->json([

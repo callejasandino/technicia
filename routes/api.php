@@ -20,6 +20,10 @@ Route::prefix('auth')->group(function ($router) {
     $router->post('login', [AuthController::class, 'login']);
 });
 
+Route::prefix('auth')->middleware('auth:sanctum')->group(function ($router) {
+    $router->get('validateToken', [AuthController::class, 'validateToken']);
+});
+
 Route::prefix('store')->middleware('auth:sanctum')->group(function ($router) {
     $router->get('index', [StoreController::class, 'index']);
     $router->post('store', [StoreController::class, 'store']);

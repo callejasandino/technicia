@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
-    public static function login(Request $request) {
+    public static function login(Request $request)
+    {
         $user = User::where('email', $request->input('email'))->first();
 
-        if(!$user){
+        if(!$user) {
             return response()->json([
                 'error' => 'User not Found!'
             ], 404);
@@ -29,9 +30,19 @@ class AuthService
         return $user->createToken($tokeneable)->plainTextToken;
     }
 
-    public static function logout() {
+    public static function logout()
+    {
         $authUser = Auth::user();
 
         $authUser->tokens()->delete();
-    }  
+    }
+
+    public static function validateToken()
+    {
+        $validated = Auth::user() ? true : false;
+
+        return response()->json([
+            'validated' => $validated
+        ]);
+    }
 }
